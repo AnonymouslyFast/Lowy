@@ -1,0 +1,4 @@
+name: Lowy
+version: '${project.version}'
+main: me.anonymouslyfast.lowy.Lowy
+api-version: '1.20'
