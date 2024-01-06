@@ -1,5 +1,6 @@
-package me.anonymouslyfast;
+package me.anonymouslyfast.lowy;
 
+import me.anonymouslyfast.lowy.listeners.discord.DiscordListeners;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -26,16 +27,16 @@ public class BotEssentials {
                     .build()
                     .awaitReady();
             Lowy.logger.info("Bot is ON");
-
-            EmbedBuilder embed = new EmbedBuilder()
-                    .setColor(Color.green)
-                    .setDescription(":white_check_mark: **Server Started!**")
-                    .setTimestamp(Instant.now());
-            BotEssentials.jda.getTextChannelById(BotEssentials.MinecraftChannelID).sendMessageEmbeds(embed.build()).complete();
-
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        jda.addEventListener(new DiscordListeners());
+
+        EmbedBuilder embed = new EmbedBuilder()
+                .setColor(Color.green)
+                .setDescription(":white_check_mark: **Server Started!**")
+                .setTimestamp(Instant.now());
+        BotEssentials.jda.getTextChannelById(BotEssentials.MinecraftChannelID).sendMessageEmbeds(embed.build()).complete();
     }
 
     // Stops the bot and logs it
