@@ -22,6 +22,9 @@ public class BotEssentials {
 
     public static String DiscordVerificationID;
 
+    public static String VerifiedRoleID;
+    public static String guildID;
+
     public static JDA jda;
 
     // Creates the bot and starts it.

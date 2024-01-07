@@ -7,6 +7,7 @@ import me.anonymouslyfast.lowy.listeners.minecraft.JoinListener;
 import me.anonymouslyfast.lowy.listeners.minecraft.LeaveListener;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,6 +23,7 @@ public final class Lowy extends JavaPlugin {
     public static Lowy plugin;
 
     public Logger log = getLogger();
+
 
     @Override
     public void onEnable() {
@@ -43,10 +45,14 @@ public final class Lowy extends JavaPlugin {
             BotEssentials.MinecraftChannelID = getConfig().getString("minecraft-to-discord-channel-id");
             BotEssentials.MinecraftLogID = getConfig().getString("minecraft-logs-channel-id");
             BotEssentials.DiscordVerificationID = getConfig().getString("discord-verification-channel-id");
+            BotEssentials.VerifiedRoleID = getConfig().getString("discord-verified-role-id");
+            BotEssentials.guildID = getConfig().getString("guild-id");
             if (BotEssentials.Token == null) log.severe("Please Provide the bot Token so I can log into it. (plugins/Lowy/config.yml)");
             if (BotEssentials.MinecraftChannelID == null) log.severe("Please Provide the minecraft-to-discord-channel-id so I send messages in it. (plugins/Lowy/config.yml)");
             if (BotEssentials.MinecraftLogID == null) log.severe("Please Provide the minecraft-logs-channel-id so I send messages in it. (plugins/Lowy/config.yml)");
             if (BotEssentials.DiscordVerificationID == null) log.severe("Please Provide the discord-verification-channel-id so I can access the channel. (plugins/Lowy/config.yml)");
+            if (BotEssentials.VerifiedRoleID == null) log.severe("Please Provide the discord-verified-role-ID so I can access the role. (plugins/Lowy/config.yml)");
+            if (BotEssentials.guildID == null) log.severe("Please Provide the guild-id so I can access the guild. (plugins/Lowy/config.yml)");
             //END OF CONFIG CUSTOMIZATION
 
             BotEssentials.startBot();

@@ -1,11 +1,9 @@
 package me.anonymouslyfast.lowy.commands.Discord;
 
-import ch.njol.skript.lang.Variable;
 import ch.njol.skript.variables.Variables;
 import me.anonymouslyfast.lowy.BotEssentials;
-import me.anonymouslyfast.lowy.Lowy;
 import me.anonymouslyfast.lowy.Utils.ColorUtil;
-import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.concrete.PrivateChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -23,9 +21,12 @@ public class VerifyCommand extends ListenerAdapter {
 
     private static void verify(Player player, User user) {
         Variables.setVariable("verified::" + player.getUniqueId(), user.getId(), null, false);
+        Variables.deleteVariable("-verifyCode::" + player.getUniqueId(), null, false);
         Object verificationVar = Variables.getVariable("verified::" + player.getUniqueId(), null, false);
         Bukkit.broadcastMessage(ColorUtil.colorCode("&7=== &6&lVerification Alert &7 ===\n&f" + player.getName() + " &fhas verified their discord and got some rewards!\n&7(/verify)\n&7=== &6&lVerification Alert &7 ==="));
         player.getInventory().addItem(new ItemStack(Material.STONE, 30));
+        Guild guild = BotEssentials.jda.getGuildById(BotEssentials.guildID);
+        guild.addRoleToMember(user, guild.getRoleById(BotEssentials.VerifiedRoleID)).complete();
         player.sendMessage(ColorUtil.colorCode("&6Thanks for verifying!\n&7Rewards:\n  &8- &f30x Stone (TEMP)"));
         DirectMessageUser(user, ":white_check_mark: You've been verified please make sure this information is right:\n\n**Discord ID:** `" + verificationVar + "` (user: <@" + verificationVar + ">) \n**Minecraft username:** `" + player.getName() + "`");
     }
