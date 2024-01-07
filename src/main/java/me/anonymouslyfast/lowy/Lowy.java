@@ -42,9 +42,11 @@ public final class Lowy extends JavaPlugin {
             BotEssentials.Token = getConfig().getString("bot-token");
             BotEssentials.MinecraftChannelID = getConfig().getString("minecraft-to-discord-channel-id");
             BotEssentials.MinecraftLogID = getConfig().getString("minecraft-logs-channel-id");
+            BotEssentials.DiscordVerificationID = getConfig().getString("discord-verification-channel-id");
             if (BotEssentials.Token == null) log.severe("Please Provide the bot Token so I can log into it. (plugins/Lowy/config.yml)");
             if (BotEssentials.MinecraftChannelID == null) log.severe("Please Provide the minecraft-to-discord-channel-id so I send messages in it. (plugins/Lowy/config.yml)");
             if (BotEssentials.MinecraftLogID == null) log.severe("Please Provide the minecraft-logs-channel-id so I send messages in it. (plugins/Lowy/config.yml)");
+            if (BotEssentials.DiscordVerificationID == null) log.severe("Please Provide the discord-verification-channel-id so I can access the channel. (plugins/Lowy/config.yml)");
             //END OF CONFIG CUSTOMIZATION
 
             BotEssentials.startBot();

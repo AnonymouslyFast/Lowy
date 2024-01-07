@@ -1,10 +1,13 @@
 package me.anonymouslyfast.lowy;
 
+import me.anonymouslyfast.lowy.commands.Discord.VerifyCommand;
 import me.anonymouslyfast.lowy.listeners.discord.DiscordListeners;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import org.bukkit.Bukkit;
 
 import java.awt.*;
 import java.time.Instant;
@@ -16,6 +19,8 @@ public class BotEssentials {
     public static String Token;
     public static String MinecraftChannelID;
     public static String MinecraftLogID;
+
+    public static String DiscordVerificationID;
 
     public static JDA jda;
 
@@ -31,6 +36,8 @@ public class BotEssentials {
             throw new RuntimeException(e);
         }
         jda.addEventListener(new DiscordListeners());
+        jda.addEventListener(new VerifyCommand());
+        jda.getPresence().setActivity(Activity.playing("Lowy.minehut.gg (" + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers() + ")"));
 
         EmbedBuilder embed = new EmbedBuilder()
                 .setColor(Color.green)

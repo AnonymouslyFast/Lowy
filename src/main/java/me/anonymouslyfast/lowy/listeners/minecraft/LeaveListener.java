@@ -3,6 +3,7 @@ package me.anonymouslyfast.lowy.listeners.minecraft;
 import me.anonymouslyfast.lowy.BotEssentials;
 import me.anonymouslyfast.lowy.Lowy;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Activity;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -23,6 +24,8 @@ public class LeaveListener implements Listener {
         if (prefix == null) prefix = "Default";
         Color color = Color.red;
         String author = ChatColor.stripColor(prefix + " | " + player.getDisplayName()) + " Left! (" + (Bukkit.getOnlinePlayers().size()-1) + "/" + Bukkit.getMaxPlayers() + ")";
+
+        BotEssentials.jda.getPresence().setActivity(Activity.playing("Lowy.minehut.gg (" + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers() + ")"));
 
         embed = new EmbedBuilder()
                 .setColor(color)

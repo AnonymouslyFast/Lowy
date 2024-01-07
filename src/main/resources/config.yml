@@ -10,3 +10,4 @@
 bot-token: ''
 minecraft-to-discord-channel-id: ''
 minecraft-logs-channel-id: ''
+discord-verification-channel-id: ''

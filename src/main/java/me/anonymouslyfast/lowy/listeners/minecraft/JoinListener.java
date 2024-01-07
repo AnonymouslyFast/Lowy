@@ -4,6 +4,7 @@ import me.anonymouslyfast.lowy.BotEssentials;
 import me.anonymouslyfast.lowy.Lowy;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+import net.dv8tion.jda.api.entities.Activity;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -30,7 +31,7 @@ public class JoinListener implements Listener {
             author = ChatColor.stripColor(prefix + " | " + player.getDisplayName()) + " Joined for the first time! (" + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers() + ")";
         }
 
-
+        BotEssentials.jda.getPresence().setActivity(Activity.playing("Lowy.minehut.gg (" + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers() + ")"));
         embed = new EmbedBuilder()
                 .setColor(color)
                 .setAuthor(author, null, "https://crafatar.com/avatars/" + player.getUniqueId() + "?overlay=1")

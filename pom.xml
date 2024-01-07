@@ -23,8 +23,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
+          <source>9</source>
+          <target>9</target>
         </configuration>
       </plugin>
       <plugin>
@@ -58,6 +58,11 @@
           <id>sonatype</id>
           <url>https://oss.sonatype.org/content/groups/public/</url>
       </repository>
+      <repository>
+          <id>skript-releases</id>
+          <name>Skript Repository</name>
+          <url>https://repo.skriptlang.org/releases</url>
+      </repository>
   </repositories>
 
   <dependencies>
@@ -82,6 +87,12 @@
           <groupId>org.reflections</groupId>
           <artifactId>reflections</artifactId>
           <version>0.10.2</version>
+      </dependency>
+      <dependency>
+          <groupId>com.github.SkriptLang</groupId>
+          <artifactId>Skript</artifactId>
+          <version>2.7.3</version>
+          <scope>provided</scope>
       </dependency>
   </dependencies>
 </project>
