@@ -1,13 +1,10 @@
 package me.anonymouslyfast.lowy;
 
-import me.anonymouslyfast.lowy.listeners.discord.DiscordListeners;
-import me.anonymouslyfast.lowy.listeners.minecraft.ChatListener;
-import me.anonymouslyfast.lowy.listeners.minecraft.CommandsListener;
-import me.anonymouslyfast.lowy.listeners.minecraft.JoinListener;
-import me.anonymouslyfast.lowy.listeners.minecraft.LeaveListener;
+import me.anonymouslyfast.lowy.commands.Minecraft.Verify;
+import me.anonymouslyfast.lowy.database.DataBaseSetUp;
+import me.anonymouslyfast.lowy.listeners.minecraft.*;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -33,14 +30,20 @@ public final class Lowy extends JavaPlugin {
             // Registers Luckperms
             RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
             if (provider != null) {
-                LuckPerms api = provider.getProvider();
-                luckperms = api;
+                luckperms = provider.getProvider();
             }
 
             // CONFIG CUSTOMIZATION
             reloadConfig();
             saveDefaultConfig();
 
+                // DataBase
+            DataBaseSetUp.username = getConfig().getString("db-username");
+            DataBaseSetUp.password = getConfig().getString("db-password");
+            DataBaseSetUp.url = getConfig().getString("db-url");
+                // End of DataBase
+
+                // Discord Bot
             BotEssentials.Token = getConfig().getString("bot-token");
             BotEssentials.MinecraftChannelID = getConfig().getString("minecraft-to-discord-channel-id");
             BotEssentials.MinecraftLogID = getConfig().getString("minecraft-logs-channel-id");
@@ -53,6 +56,8 @@ public final class Lowy extends JavaPlugin {
             if (BotEssentials.DiscordVerificationID == null) log.severe("Please Provide the discord-verification-channel-id so I can access the channel. (plugins/Lowy/config.yml)");
             if (BotEssentials.VerifiedRoleID == null) log.severe("Please Provide the discord-verified-role-ID so I can access the role. (plugins/Lowy/config.yml)");
             if (BotEssentials.guildID == null) log.severe("Please Provide the guild-id so I can access the guild. (plugins/Lowy/config.yml)");
+                // End Discord Bot
+
             //END OF CONFIG CUSTOMIZATION
 
             BotEssentials.startBot();
@@ -62,6 +67,14 @@ public final class Lowy extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new LeaveListener(), this);
             getServer().getPluginManager().registerEvents(new ChatListener(), this);
             getServer().getPluginManager().registerEvents(new CommandsListener(), this);
+            getServer().getPluginManager().registerEvents(new DiscordDashboard(), this);
+
+            // Registers the Minecraft Commands
+            getCommand("verify").setExecutor(new Verify());
+            getCommand("discorddashboard").setExecutor(new me.anonymouslyfast.lowy.commands.Minecraft.DiscordDashboard());
+
+            // DataBase
+            DataBaseSetUp.Login();
 
 
 

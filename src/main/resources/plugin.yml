@@ -2,3 +2,13 @@ name: Lowy
 version: '${project.version}'
 main: me.anonymouslyfast.lowy.Lowy
 api-version: '1.20'
+commands:
+  verify:
+    description: Connect you discord account and minecraft account to get some rewards!
+    usage: /verify
+  discorddashboard:
+    description: Admin control panel for Discord -> Minecraft connections.
+    usage: /discorddashboard
+    aliases:
+      - discordpanel
+      - discordadmin

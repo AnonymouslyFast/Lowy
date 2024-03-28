@@ -23,13 +23,15 @@ public class LeaveListener implements Listener {
         String prefix = Lowy.luckperms.getUserManager().getUser(player.getUniqueId()).getCachedData().getMetaData().getPrefix();
         if (prefix == null) prefix = "Default";
         Color color = Color.red;
-        String author = ChatColor.stripColor(prefix + " | " + player.getDisplayName()) + " Left! (" + (Bukkit.getOnlinePlayers().size()-1) + "/" + Bukkit.getMaxPlayers() + ")";
+        String newprefix = ChatColor.translateAlternateColorCodes('&', prefix);
+        newprefix = ChatColor.stripColor(newprefix);
+        String author = ChatColor.stripColor(newprefix + " | " + player.getDisplayName()) + " Left! (" + (Bukkit.getOnlinePlayers().size()-1) + "/" + Bukkit.getMaxPlayers() + ")";
 
-        BotEssentials.jda.getPresence().setActivity(Activity.playing("Lowy.minehut.gg (" + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers() + ")"));
+        BotEssentials.jda.getPresence().setActivity(Activity.playing("Lowy.minehut.gg (" + (Bukkit.getOnlinePlayers().size()-1) + "/" + Bukkit.getMaxPlayers() + ")"));
 
         embed = new EmbedBuilder()
                 .setColor(color)
-                .setAuthor(author, null, "https://crafatar.com/avatars/" + player.getUniqueId() + "?overlay=1")
+                .setAuthor(author, null, "https://minotar.net/avatar/" + player.getUniqueId())
                 .setTimestamp(Instant.now());
         BotEssentials.jda.getTextChannelById(BotEssentials.MinecraftChannelID).sendMessageEmbeds(embed.build()).queue();
     }

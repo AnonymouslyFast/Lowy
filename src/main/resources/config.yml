@@ -6,6 +6,7 @@
 # please do not change anything unless needed
 #
 
+# Discord
 
 bot-token: ''
 minecraft-to-discord-channel-id: ''
@@ -13,3 +14,11 @@ minecraft-logs-channel-id: ''
 discord-verification-channel-id: ''
 discord-verified-role-id: ''
 guild-id: ''
+
+# DataBase
+db-username: ''
+db-password: ''
+# The Data base template is:
+#  jdbc:sqlserver://ServerName:Port;databaseName=;user=username;password=password;
+db-url: ''
+
